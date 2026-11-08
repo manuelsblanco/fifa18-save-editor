@@ -1,0 +1,97 @@
+name: Desktop builds and tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Linux dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y qt6-base-dev libarchive-dev rpm
+      - name: macOS dependencies
+        if: runner.os == 'macOS'
+        run: brew install qt libarchive
+      - name: Windows Qt
+        if: runner.os == 'Windows'
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          arch: win64_msvc2022_64
+      - name: Windows dependencies
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          vcpkg install libarchive:x64-windows
+          choco install nsis -y --no-progress
+      - name: Configure Linux
+        if: runner.os == 'Linux'
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Configure macOS
+        if: runner.os == 'macOS'
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(brew --prefix qt);$(brew --prefix libarchive)"
+      - name: Configure Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-windows
+      - name: Build
+        run: cmake --build build --config Release --parallel
+      - name: Python reference tests
+        run: python -m unittest discover -s tests -v
+      - name: Native tests Linux
+        if: runner.os == 'Linux'
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python tests/native_check.py build/fifa18-save-editor
+      - name: Native tests macOS
+        if: runner.os == 'macOS'
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python tests/native_check.py build/fifa18-save-editor.app/Contents/MacOS/fifa18-save-editor
+      - name: Native tests Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          $env:PATH = "$env:VCPKG_INSTALLATION_ROOT/installed/x64-windows/bin;$env:PATH"
+          python tests/native_check.py build/Release/fifa18-save-editor.exe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Package Linux
+        if: runner.os == 'Linux'
+        working-directory: build
+        run: cpack -G 'DEB;RPM' -C Release
+      - name: Package macOS
+        if: runner.os == 'macOS'
+        working-directory: build
+        run: cpack -G DragNDrop -C Release
+      - name: Package Windows
+        if: runner.os == 'Windows'
+        working-directory: build
+        shell: pwsh
+        run: |
+          cpack -G ZIP -C Release
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cpack -G NSIS -C Release
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fifa18-save-editor-${{ runner.os }}
+          path: |
+            build/*.deb
+            build/*.rpm
+            build/*.dmg
+            build/*.zip
+            build/*.exe
+          if-no-files-found: error

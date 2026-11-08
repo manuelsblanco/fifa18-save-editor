@@ -1,0 +1,224 @@
+{
+  "bxis": {
+    "name": "career_playasplayer",
+    "fields": {
+      "ykFq": {
+        "name": "playerid",
+        "low": -1
+      }
+    }
+  },
+  "mPrV": {
+    "name": "career_users",
+    "fields": {
+      "HdeP": {
+        "name": "firstname",
+        "low": 0
+      },
+      "rREd": {
+        "name": "surname",
+        "low": 0
+      }
+    }
+  },
+  "CZUM": {
+    "name": "players",
+    "fields": {
+      "ykFq": {
+        "name": "playerid",
+        "low": 0
+      },
+      "kqda": {
+        "name": "gkkicking",
+        "low": 1
+      },
+      "nEbM": {
+        "name": "dribbling",
+        "low": 1
+      },
+      "ohpV": {
+        "name": "shotpower",
+        "low": 1
+      },
+      "onkY": {
+        "name": "balance",
+        "low": 1
+      },
+      "wxMq": {
+        "name": "marking",
+        "low": 1
+      },
+      "AGsE": {
+        "name": "penalties",
+        "low": 1
+      },
+      "Dydz": {
+        "name": "volleys",
+        "low": 1
+      },
+      "PhuM": {
+        "name": "slidingtackle",
+        "low": 1
+      },
+      "URGo": {
+        "name": "jumping",
+        "low": 1
+      },
+      "aReg": {
+        "name": "headingaccuracy",
+        "low": 1
+      },
+      "iTce": {
+        "name": "aggression",
+        "low": 1
+      },
+      "kerE": {
+        "name": "longpassing",
+        "low": 1
+      },
+      "mpuH": {
+        "name": "potential",
+        "low": 1
+      },
+      "yfhq": {
+        "name": "gkpositioning",
+        "low": 1
+      },
+      "YFaA": {
+        "name": "curve",
+        "low": 1
+      },
+      "nmgT": {
+        "name": "strength",
+        "low": 1
+      },
+      "vObb": {
+        "name": "shortpassing",
+        "low": 1
+      },
+      "wWzG": {
+        "name": "interceptions",
+        "low": 1
+      },
+      "xJZL": {
+        "name": "finishing",
+        "low": 1
+      },
+      "GBGj": {
+        "name": "gkhandling",
+        "low": 1
+      },
+      "NrcP": {
+        "name": "sprintspeed",
+        "low": 1
+      },
+      "SPge": {
+        "name": "acceleration",
+        "low": 1
+      },
+      "XjDq": {
+        "name": "stamina",
+        "low": 1
+      },
+      "YCnI": {
+        "name": "reactions",
+        "low": 1
+      },
+      "wGOH": {
+        "name": "crossing",
+        "low": 1
+      },
+      "xrSG": {
+        "name": "gkdiving",
+        "low": 1
+      },
+      "CsBG": {
+        "name": "longshots",
+        "low": 1
+      },
+      "CsyD": {
+        "name": "standingtackle",
+        "low": 1
+      },
+      "RRQB": {
+        "name": "agility",
+        "low": 1
+      },
+      "VgKc": {
+        "name": "freekickaccuracy",
+        "low": 1
+      },
+      "XsFD": {
+        "name": "positioning",
+        "low": 1
+      },
+      "ZoOK": {
+        "name": "vision",
+        "low": 1
+      },
+      "eYFI": {
+        "name": "gkreflexes",
+        "low": 1
+      },
+      "jlQJ": {
+        "name": "composure",
+        "low": 1
+      },
+      "MgwU": {
+        "name": "ballcontrol",
+        "low": 1
+      },
+      "UERs": {
+        "name": "overallrating",
+        "low": 1
+      }
+    }
+  },
+  "lyxL": {
+    "name": "teams",
+    "fields": {
+      "mCXg": {
+        "name": "teamid",
+        "low": 1
+      },
+      "AUsv": {
+        "name": "teamname",
+        "low": 0
+      }
+    }
+  },
+  "nQVU": {
+    "name": "editedplayernames",
+    "fields": {
+      "ykFq": {
+        "name": "playerid",
+        "low": 0
+      },
+      "HdeP": {
+        "name": "firstname",
+        "low": 0
+      },
+      "rREd": {
+        "name": "surname",
+        "low": 0
+      },
+      "xnfZ": {
+        "name": "commonname",
+        "low": 0
+      }
+    }
+  },
+  "RrqT": {
+    "name": "teamplayerlinks",
+    "fields": {
+      "mCXg": {
+        "name": "teamid",
+        "low": 1
+      },
+      "ykFq": {
+        "name": "playerid",
+        "low": 0
+      }
+    }
+  }
+}
