@@ -75,8 +75,11 @@ def read_zip(blob):
             require(len(entries) <= 256, 'Demasiados archivos en el ZIP.')
             require(sum(i.file_size for i in entries) <= MAX_EXPANDED, 'ZIP expandido demasiado grande.')
             for entry in entries:
-                path = PurePosixPath(entry.filename)
-                require(not path.is_absolute() and '..' not in path.parts and '\\' not in entry.filename and ':' not in entry.filename,
+                # ZipInfo.filename normalizes backslashes on Windows; validate
+                # the original archive name before that platform conversion.
+                original_name = entry.orig_filename
+                path = PurePosixPath(original_name)
+                require(not path.is_absolute() and '..' not in path.parts and '\\' not in original_name and ':' not in original_name,
                         'Ruta insegura en el ZIP.')
                 require(not entry.flag_bits & 1, 'ZIP protegido con contraseña no compatible.')
                 if entry.is_dir():

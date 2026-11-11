@@ -126,6 +126,7 @@ class CoreTests(unittest.TestCase):
             # Set the stored name afterwards to test an actual unsafe ZIP entry.
             entry = zipfile.ZipInfo('placeholder')
             entry.filename = path
+            entry.orig_filename = path
             stream = BytesIO()
             with zipfile.ZipFile(stream, 'w') as archive:
                 archive.writestr(entry, b'x')
