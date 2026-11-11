@@ -3,5 +3,6 @@ Type=Application
 Name=FIFA 18 Save Editor
 Comment=Edit decrypted FIFA 18 PS4 career saves
 Exec=fifa18-save-editor
+Icon=fifa18-save-editor
 Terminal=false
 Categories=Game;Utility;

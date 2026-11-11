@@ -8,19 +8,19 @@ optional GarlicSaves API client. No account, save file or API key is bundled.
 > running on PS5. Other regions and patches have not been exhaustively tested.
 > Keep a working copy of your original save.
 
-## Download v0.1.0 (pre-release)
+## Download v0.1.1 (pre-release)
 
-Download the installers from [GitHub Releases — v0.1.0](https://github.com/manuelsblanco/fifa18-save-editor/releases/tag/v0.1.0):
+Download the installers from [GitHub Releases — v0.1.1](https://github.com/manuelsblanco/fifa18-save-editor/releases/tag/v0.1.1):
 
 - **Windows x64:** portable ZIP or EXE installer.
-- **Linux x86_64:** DEB or RPM, built on Ubuntu 24.04 with Qt/libarchive dependencies.
+- **Linux x86_64:** DEB or RPM built on Ubuntu 24.04; a separate Ubuntu 26.04 DEB is also provided. Qt/libarchive dependencies are required.
 - **macOS Apple Silicon:** DMG.
 
 Windows and macOS binaries are unsigned. Read the release notes for compatibility
 and validation details. GitHub's automatically generated source archives contain
 source code; choose an attached installer to run the app.
 
-**Español:** descarga los instaladores de la [versión preliminar v0.1.0](https://github.com/manuelsblanco/fifa18-save-editor/releases/tag/v0.1.0).
+**Español:** descarga los instaladores de la [versión preliminar v0.1.1](https://github.com/manuelsblanco/fifa18-save-editor/releases/tag/v0.1.1).
 
 ## Features
 
@@ -47,7 +47,7 @@ This is not a native PS5-save decryptor, FIFA PC Cheat Engine table, or FUT edit
 6. Extract the encrypted result to USB, preserving `PS4/SAVEDATA/<account>/<CUSA>/`.
 7. Copy only the intended career to console storage and load it in FIFA 18.
 
-The GUI currently uses Spanish labels. The native editor works offline and does
+The GUI uses English labels and a high-contrast light palette from v0.1.1. The native editor works offline and does
 not need Python. The optional reference tests and GarlicSaves client use Python 3.10+.
 
 ## Build the desktop app
