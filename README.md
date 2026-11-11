@@ -8,6 +8,20 @@ optional GarlicSaves API client. No account, save file or API key is bundled.
 > running on PS5. Other regions and patches have not been exhaustively tested.
 > Keep a working copy of your original save.
 
+## Download v0.1.0 (pre-release)
+
+Download the installers from [GitHub Releases — v0.1.0](https://github.com/manuelsblanco/fifa18-save-editor/releases/tag/v0.1.0):
+
+- **Windows x64:** portable ZIP or EXE installer.
+- **Linux x86_64:** DEB or RPM, built on Ubuntu 24.04 with Qt/libarchive dependencies.
+- **macOS Apple Silicon:** DMG.
+
+Windows and macOS binaries are unsigned. Read the release notes for compatibility
+and validation details. GitHub's automatically generated source archives contain
+source code; choose an attached installer to run the app.
+
+**Español:** descarga los instaladores de la [versión preliminar v0.1.0](https://github.com/manuelsblanco/fifa18-save-editor/releases/tag/v0.1.0).
+
 ## Features
 
 - Import a decrypted ZIP and verify the three embedded databases and career CRC.
