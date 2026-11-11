@@ -1,11 +1,13 @@
 """Synthetic fixtures only: never commit personal game saves."""
 import json
+from io import BytesIO
 from pathlib import Path
 import struct
 import sys
 import tempfile
 import unittest
 import zlib
+import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from core import Career, SaveError, SCHEMA, EDITABLE, database_crc, make_zip, read_zip
@@ -120,8 +122,15 @@ class CoreTests(unittest.TestCase):
 
     def test_zip_traversal(self):
         for path in ('../bad', 'C:/bad', '/bad', 'x\\bad'):
-            with self.assertRaises(SaveError):
-                read_zip(make_zip({path: b'x'}))
+            # ZipInfo normalizes backslashes on Windows at construction time.
+            # Set the stored name afterwards to test an actual unsafe ZIP entry.
+            entry = zipfile.ZipInfo('placeholder')
+            entry.filename = path
+            stream = BytesIO()
+            with zipfile.ZipFile(stream, 'w') as archive:
+                archive.writestr(entry, b'x')
+            with self.subTest(path=path), self.assertRaises(SaveError):
+                read_zip(stream.getvalue())
 
 
 if __name__ == '__main__':
